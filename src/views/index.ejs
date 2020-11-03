@@ -1,0 +1,37 @@
+<%-include("includes/head.ejs")%>
+<!-- SECTION: CONTENT -->
+<div class="container mb-2 mt-4">
+    <h4 class="text-center mb-4">FRUITS</h4>
+    <hr />
+    <!-- SECTION : CARD -->
+    <div class="row text-center">
+        <% if (students.length > 0) { %> <% for (let student of students) { %>
+        <div class="col-md-4 text-center ">
+            <div class="card mb-4 mt-2 mr-4 ml-4 mx-auto" style="width: 17rem;">
+                <h5 class="card-title text-center mt-2 mb-2"><%-student.name%></h5>
+                <img class="card-img-top" src="<%-student.imageUrl%>" alt="Card image cap" />
+                <div class="card-body text-center">
+                    <h5 class="card-title">$ <%-student.age%></h5>
+
+
+                    <form id="myForm" method="POST" action="/delete">
+                        <a href="/edit/<%= student.id %>?edit=true" class="btn btn-warning mr-3">Update</a>
+                        <input type="hidden" value="<%= student.id %>" name="studentId" />
+                        <button class="btn btn-danger" onclick="return confirm('Are You Sure?');">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <!-- END CARD -->
+        <% } else { %>
+        <h6 class="text-center">No Student</h6>
+        <% } %>
+    </div>
+</div>
+<!--  -->
+
+<%-include("includes/footer.ejs")%>
